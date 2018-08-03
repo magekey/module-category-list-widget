@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright © MageKey. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+?>
+<?php
+/**
+ * Template for displaying category list widget
+ *
+ * @var $block \MageKey\CategoryListWidget\Block\Widget
+ */
+if ($categoryNode = $block->getCategoryNode()) {
+    $title = $block->getTitle();
+}
+?>
+<?php if ($categoryNode) : ?>
+<div class="block widget block-mgk-category-list-widget">
+    <?php if ($title) : ?>
+    <div class="block-title">
+        <strong role="heading" aria-level="2"><?= $block->escapeHtml($title) ?></strong>
+    </div>
+    <?php endif; ?>
+    <div class="block-content">
+        <?= /* @escapeNotVerified */ $block->getNodeRenderer()->setNode($categoryNode)->toHtml() ?>
+    </div>
+</div>
+<?php endif; ?>

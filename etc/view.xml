@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © MageKey. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/view.xsd">
+    <media>
+        <images module="MageKey_CategoryListWidget">
+            <image id="mgk_categorylistwidget_inline_images" type="small_image">
+                <width>240</width>
+                <height>300</height>
+            </image>
+        </images>
+    </media>
+</view>

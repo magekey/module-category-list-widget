@@ -1,0 +1,47 @@
+<?php
+/**
+ * Copyright © MageKey. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+?>
+<?php
+/**
+ * Template for displaying category list node
+ *
+ * @var $block \Magento\Framework\View\Element\Template
+ */
+
+if (($node = $block->getNode()) && $node->hasChildren()) {
+    $exists = true;
+    $level = (int)$block->getLevel();
+    $columnsCount = (int)$this->getData('columns_count');
+    $cssClass = !$level ? ' inline-images columns-' . $columnsCount : '';
+    $image = 'mgk_categorylistwidget_inline_images';
+    $imageAttr = [
+        'width' => $this->getData('image_width') ?: null,
+        'height' => $this->getData('image_height') ?: null,
+    ];
+    $_imageHelper = $this->helper(\MageKey\CategoryListWidget\Helper\Image::class);
+}
+?>
+<?php if (isset($exists)) : ?>
+    <?php if (!$level) : ?>
+    <ul class="items<?= /* @escapeNotVerified */ $cssClass ?>">
+    <?php endif; ?>
+        <?php foreach ($node->getChildren() as $child) : ?>
+        <li class="item">
+            <a class="cat-item" href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
+                <div class="cat-image">
+                    <img alt="<?= /* @escapeNotVerified */ $child->getName() ?>"
+                        src="<?= /* @escapeNotVerified */ $_imageHelper->getImage('catalog/category/' . $child->getImage(), $image, $imageAttr) ?>" />
+                </div>
+                <div class="cat-name"><?= /* @escapeNotVerified */ $child->getName() ?></div>
+            </a>
+        </li>
+        <?= /* @escapeNotVerified */ $block->setNode($child)->setLevel($level + 1)->toHtml() ?>
+        <?php endforeach; ?>
+    <?php if (!$level) : ?>
+    </ul>
+    <?php endif; ?>
+<?php endif; ?>

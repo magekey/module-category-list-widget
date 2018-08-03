@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageKey. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Template Pool DI -->
+    <type name="MageKey\CategoryListWidget\Model\TemplateHandler\Pool">
+        <arguments>
+            <argument name="sources" xsi:type="array">
+            	<item name="default" xsi:type="array">
+                	<item name="template" xsi:type="string">MageKey_CategoryListWidget::widget/default.phtml</item>
+                	<item name="source" xsi:type="string">MageKey\CategoryListWidget\Model\TemplateHandler\DefaultList</item>
+                </item>
+                <item name="inline_images" xsi:type="array">
+                	<item name="template" xsi:type="string">MageKey_CategoryListWidget::widget/inline-images.phtml</item>
+                	<item name="source" xsi:type="string">MageKey\CategoryListWidget\Model\TemplateHandler\InlineImages</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>

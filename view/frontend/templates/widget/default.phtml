@@ -1,0 +1,32 @@
+<?php
+/**
+ * Copyright © MageKey. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+?>
+<?php
+/**
+ * Template for displaying category list node
+ *
+ * @var $block \Magento\Framework\View\Element\Template
+ */
+
+if (($node = $block->getNode()) && $node->hasChildren()) {
+    $exists = true;
+    $level = (int)$block->getLevel();
+    $cssClass = !$level ? 'default' : '';
+}
+?>
+<?php if (isset($exists)) : ?>
+    <ul class="items <?= /* @escapeNotVerified */ $cssClass ?>">
+        <?php foreach ($node->getChildren() as $child) : ?>
+        <li class="item">
+            <a href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
+                <?= /* @escapeNotVerified */ $child->getName() ?>
+            </a>
+            <?= /* @escapeNotVerified */ $block->setNode($child)->setLevel($level + 1)->toHtml() ?>
+        </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>

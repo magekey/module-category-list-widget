@@ -1,0 +1,111 @@
+// /**
+//  * Copyright © MageKey. All rights reserved.
+//  * See LICENSE.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+// Default
+@mgk-category-list-widget__default__items__offset: 1rem;
+
+// Inline
+@mgk-category-list-widget__inline__item__columns_max: 12;
+@mgk-category-list-widget__inline__item__padding: 1rem;
+@mgk-category-list-widget__inline__item__margin: 0 0 1rem 0;
+@mgk-category-list-widget__inline__link__font-size: 1.4rem;
+
+//
+//  Mixin
+//  _____________________________________________
+
+.mgk-category-list-widget-generate-columns(@n, @i: 1) when (@i =< @n) {
+    &.columns-@{i} {
+        > li {
+            width: (100% / @i);
+        }
+    }
+    .mgk-category-list-widget-generate-columns(@n, (@i + 1));
+}
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .block-mgk-category-list-widget {
+        .block {
+            &-content {
+                .items {
+                    &.default {
+                        li {
+                            margin: 0;
+
+                            ul {
+                                margin-left: @mgk-category-list-widget__default__items__offset;
+                            }
+                        }
+                    }
+                    &.inline-images {
+                        display: flex;
+                        flex-wrap: wrap;
+                        
+                        > li {
+                            margin: @mgk-category-list-widget__inline__item__margin;
+                            
+                            a {
+                                font-size: @mgk-category-list-widget__inline__link__font-size;
+                                display: block;
+                                padding: @mgk-category-list-widget__inline__item__padding;
+
+                                img {
+                                    max-width: 100%;
+                                    height: auto;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .block-mgk-category-list-widget {
+        .block {
+            &-content {
+                .items {
+                    &.inline-images {
+                        .mgk-category-list-widget-generate-columns(@mgk-category-list-widget__inline__item__columns_max);
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .block-mgk-category-list-widget {
+        .block {
+            &-content {
+                .items {
+                    &.inline-images {
+                        > li {
+                            width: 50%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

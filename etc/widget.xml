@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © MageKey. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="mgk_categorylistwidget" class="MageKey\CategoryListWidget\Block\Widget" is_email_compatible="true" ttl="86400">
+        <label translate="true">Category List</label>
+        <description translate="true">List of Categories</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" required="false" visible="true" sort_order="10">
+                <label translate="true">Title</label>
+            </parameter>
+            <parameter name="parent_category_path" xsi:type="block" visible="true" required="false" sort_order="20">
+                <label translate="true">Parent Category</label>
+                <description translate="true">Current Category of the current store will be used if not set.</description>
+                <block class="MageKey\CategoryListWidget\Block\Adminhtml\Category\WidgetChooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string" translate="true">Select Category...</item>
+                        </item>
+                    </data>
+                </block>
+            </parameter>
+            <parameter name="recursion_level" xsi:type="text" required="true" visible="true" sort_order="30">
+                <label translate="true">Recursion Level</label>
+                <value>1</value>
+            </parameter>
+            <parameter name="display_mode" xsi:type="select" visible="true" required="true" sort_order="40">
+                <label translate="true">Display Mode</label>
+                <options>
+                    <option name="default" value="default" selected="true">
+                        <label translate="true">Default List</label>
+                    </option>
+                    <option name="inline_images" value="inline_images">
+                        <label translate="true">Inline List with Images</label>
+                    </option>
+                </options>
+            </parameter>
+            <parameter name="columns_count" xsi:type="select" required="true" visible="true" sort_order="45"
+                       source_model="MageKey\CategoryListWidget\Model\Config\Source\ColumnsCount">
+                <label translate="true">Columns</label>
+                <depends>
+                    <parameter name="display_mode" value="inline_images" />
+                </depends>
+            </parameter>
+            <parameter name="image_width" xsi:type="text" required="false" visible="true" sort_order="50">
+                <label translate="true">Image Width</label>
+                <depends>
+                    <parameter name="display_mode" value="inline_images" />
+                </depends>
+            </parameter>
+            <parameter name="image_height" xsi:type="text" required="false" visible="true" sort_order="55">
+                <label translate="true">Image Height</label>
+                <depends>
+                    <parameter name="display_mode" value="inline_images" />
+                </depends>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true" required="true" sort_order="100">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="MageKey_CategoryListWidget::widget.phtml" selected="true">
+                        <label translate="true">Category List Container</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>
