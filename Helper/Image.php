@@ -130,6 +130,18 @@ class Image extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
+     * Get media attributes
+     *
+     * @param string $imageId
+     * @param string $moduleName
+     * @return array
+     */
+    public function getMediaAttributes($imageId = null, $moduleName = self::MODULE_NAME)
+    {
+        return $this->getConfigView()->getMediaAttributes($moduleName, self::MEDIA_TYPE_CONFIG_NODE, $imageId);
+    }
+
+    /**
      * Merge attributes
      *
      * @param string $moduleName
@@ -150,11 +162,11 @@ class Image extends \Magento\Framework\App\Helper\AbstractHelper
                 'constrain' => true,
                 'transparency' => true,
                 'frame' => false,
-                'aspect_ratio' => false,
+                'aspect_ratio' => true,
                 'width' => null,
                 'height' => null
             ],
-            $this->getConfigView()->getMediaAttributes($moduleName, self::MEDIA_TYPE_CONFIG_NODE, $imageId),
+            $this->getMediaAttributes($imageId, $moduleName),
             $attributes
         );
     }

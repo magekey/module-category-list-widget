@@ -17,12 +17,15 @@ if (($node = $block->getNode()) && $node->hasChildren()) {
     $level = (int)$block->getLevel();
     $columnsCount = (int)$this->getData('columns_count');
     $cssClass = !$level ? ' inline-images columns-' . $columnsCount : '';
-    $image = 'mgk_categorylistwidget_inline_images';
-    $imageAttr = [
-        'width' => $this->getData('image_width') ?: null,
-        'height' => $this->getData('image_height') ?: null,
-    ];
     $_imageHelper = $this->helper(\MageKey\CategoryListWidget\Helper\Image::class);
+    $image = 'mgk_categorylistwidget_inline_images';
+    $mediaAttributes = $_imageHelper->getMediaAttributes($image);
+    $imageAttr = [
+        'width' => $this->getData('image_width') ?: $mediaAttributes['width'],
+        'height' => $this->getData('image_height') ?: $mediaAttributes['height'],
+    ];
+    $catImageStyle = 'width:' . $imageAttr['width'] . 'px;';
+    $catImageStyle .= 'height:' . $imageAttr['height'] . 'px;';
 }
 ?>
 <?php if (isset($exists)) : ?>
@@ -32,7 +35,7 @@ if (($node = $block->getNode()) && $node->hasChildren()) {
         <?php foreach ($node->getChildren() as $child) : ?>
         <li class="item">
             <a class="cat-item" href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
-                <div class="cat-image">
+                <div class="cat-image" style="<?= /* @escapeNotVerified */ $catImageStyle ?>">
                     <img alt="<?= /* @escapeNotVerified */ $child->getName() ?>"
                         src="<?= /* @escapeNotVerified */ $_imageHelper->getImage('catalog/category/' . $child->getImage(), $image, $imageAttr) ?>" />
                 </div>
