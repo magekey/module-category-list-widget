@@ -39,7 +39,7 @@ if (($node = $block->getNode()) && $node->hasChildren()) {
                 <div class="cat-name"><?= /* @escapeNotVerified */ $child->getName() ?></div>
             </a>
         </li>
-        <?= /* @escapeNotVerified */ $block->setNode($child)->setLevel($level + 1)->toHtml() ?>
+            <?= /* @escapeNotVerified */ $block->setNode($child)->setLevel($level + 1)->toHtml() ?>
         <?php endforeach; ?>
     <?php if (!$level) : ?>
     </ul>

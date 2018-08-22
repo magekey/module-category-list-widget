@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageKey. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="category.image">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="helper" helper="MageKey\CategoryListWidget\Helper\Data::getImageTemplate">
+                    <param name="name">Magento_Catalog::category/image.phtml</param>
+                </argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>
