@@ -40,7 +40,7 @@ class Widget extends \Magento\Framework\View\Element\Template implements BlockIn
     protected $_categoryNode;
 
     /**
-     * @param \Magento\Catalog\Block\Product\Context $context
+     * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param CategoryTreeFactory $categoryTreeFactory
      * @param TemplateHandlerPool $templateHandlerPool
