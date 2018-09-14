@@ -25,15 +25,19 @@
                     </data>
                 </block>
             </parameter>
-            <parameter name="recursion_level" xsi:type="text" required="true" visible="true" sort_order="30">
+            <parameter name="recursion_level" xsi:type="text" visible="true" sort_order="30">
                 <label translate="true">Recursion Level</label>
+                <description translate="true">Leave empty to use all sub categories.</description>
                 <value>1</value>
             </parameter>
             <parameter name="display_mode" xsi:type="select" visible="true" required="true" sort_order="40">
                 <label translate="true">Display Mode</label>
                 <options>
                     <option name="default" value="default" selected="true">
-                        <label translate="true">Default List</label>
+                        <label translate="true">List</label>
+                    </option>
+                    <option name="collapsible" value="collapsible">
+                        <label translate="true">Collapsible List</label>
                     </option>
                     <option name="inline_images" value="inline_images">
                         <label translate="true">Inline List with Images</label>

@@ -15,6 +15,10 @@
                 	<item name="template" xsi:type="string">MageKey_CategoryListWidget::widget/default.phtml</item>
                 	<item name="source" xsi:type="string">MageKey\CategoryListWidget\Model\TemplateHandler\DefaultList</item>
                 </item>
+                <item name="collapsible" xsi:type="array">
+                    <item name="template" xsi:type="string">MageKey_CategoryListWidget::widget/collapsible.phtml</item>
+                    <item name="source" xsi:type="string">MageKey\CategoryListWidget\Model\TemplateHandler\DefaultList</item>
+                </item>
                 <item name="inline_images" xsi:type="array">
                 	<item name="template" xsi:type="string">MageKey_CategoryListWidget::widget/inline-images.phtml</item>
                 	<item name="source" xsi:type="string">MageKey\CategoryListWidget\Model\TemplateHandler\InlineImages</item>

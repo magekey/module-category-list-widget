@@ -10,6 +10,12 @@
 // Default
 @mgk-category-list-widget__default__items__offset: 1rem;
 
+// Collapsible
+@mgk-category-list-widget__collapsible__icon__content: @icon-down;
+@mgk-category-list-widget__collapsible__icon__position: after;
+@mgk-category-list-widget__collapsible__icon__size: 9px;
+@mgk-category-list-widget__collapsible__icon-active__content: @icon-up;
+
 // Inline
 @mgk-category-list-widget__inline__item__columns_max: 12;
 @mgk-category-list-widget__inline__item__padding: 1rem;
@@ -44,6 +50,29 @@
 
                             ul {
                                 margin-left: @mgk-category-list-widget__default__items__offset;
+                            }
+                        }
+                    }
+                    &.collapsible {
+                        .item.collapsible {
+                            > a {
+
+                                .lib-icon-font(
+                                @_icon-font-content: @mgk-category-list-widget__collapsible__icon__content,
+                                @_icon-font-size: @mgk-category-list-widget__collapsible__icon__size,
+                                @_icon-font-position: @mgk-category-list-widget__collapsible__icon__position,
+                                @_icon-font-display: block
+                                );
+
+                                &:after {
+                                    margin-left: 1rem;
+                                }
+                            }
+                            &.active > a {
+                                .lib-icon-font-symbol(
+                                    @_icon-font-content: @mgk-category-list-widget__collapsible__icon-active__content,
+                                    @_icon-font-position: @mgk-category-list-widget__collapsible__icon__position
+                                );
                             }
                         }
                     }
