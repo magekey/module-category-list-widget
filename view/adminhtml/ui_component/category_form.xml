@@ -6,7 +6,7 @@
  */
 -->
 <form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
-    <fieldset name="content" sortOrder="10">
+    <fieldset name="content">
         <field name="is_show_image" sortOrder="35" formElement="checkbox">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -19,7 +19,6 @@
                 </validation>
                 <dataType>boolean</dataType>
                 <label translate="true">Show Category Image</label>
-                <notice translate="true"><![CDATA[Use global config to manage this attribute.]]></notice>
             </settings>
             <formElements>
                 <checkbox>
@@ -31,6 +30,31 @@
                         <prefer>toggle</prefer>
                     </settings>
                 </checkbox>
+            </formElements>
+        </field>
+        <field name="thumb_image" sortOrder="45" formElement="fileUploader">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">category</item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>ui/form/element/uploader/uploader</elementTmpl>
+                <dataType>string</dataType>
+                <label translate="true">Category Thumbnail</label>
+                <visible>true</visible>
+                <required>false</required>
+            </settings>
+            <formElements>
+                <fileUploader>
+                    <settings>
+                        <required>false</required>
+                        <uploaderConfig>
+                            <param xsi:type="url" name="url" path="catalog/category_image/upload"/>
+                        </uploaderConfig>
+                        <previewTmpl>Magento_Catalog/image-preview</previewTmpl>
+                    </settings>
+                </fileUploader>
             </formElements>
         </field>
     </fieldset>

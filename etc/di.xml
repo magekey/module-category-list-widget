@@ -12,14 +12,17 @@
         <arguments>
             <argument name="sources" xsi:type="array">
             	<item name="default" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">List</item>
                 	<item name="template" xsi:type="string">MageKey_CategoryListWidget::widget/default.phtml</item>
                 	<item name="source" xsi:type="string">MageKey\CategoryListWidget\Model\TemplateHandler\DefaultList</item>
                 </item>
                 <item name="collapsible" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Collapsible List</item>
                     <item name="template" xsi:type="string">MageKey_CategoryListWidget::widget/collapsible.phtml</item>
                     <item name="source" xsi:type="string">MageKey\CategoryListWidget\Model\TemplateHandler\DefaultList</item>
                 </item>
                 <item name="inline_images" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Inline List with Images</item>
                 	<item name="template" xsi:type="string">MageKey_CategoryListWidget::widget/inline-images.phtml</item>
                 	<item name="source" xsi:type="string">MageKey\CategoryListWidget\Model\TemplateHandler\InlineImages</item>
                 </item>

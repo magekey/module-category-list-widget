@@ -12,10 +12,16 @@ class InlineImages extends HandlerAbstract
     /**
      * {@inheritdoc}
      */
-    public function prepareCollection(CategoryCollection $collection)
+    public function prepareCollection(CategoryCollection $collection, array $options = [])
     {
-        $collection->addAttributeToSelect([
+        $attributes = [
             'image'
-        ]);
+        ];
+
+        if (!empty($options['image_attribute'])) {
+            $attributes[] = $options['image_attribute'];
+        }
+
+        $collection->addAttributeToSelect(array_unique($attributes));
     }
 }

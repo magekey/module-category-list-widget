@@ -159,7 +159,7 @@ class Widget extends \Magento\Framework\View\Element\Template implements BlockIn
                 $collection = $categoryTree->getCollection();
                 $collection->addAttributeToFilter('is_active', 1);
                 if ($templateHandler) {
-                    $templateHandler->prepareCollection($collection);
+                    $templateHandler->prepareCollection($collection, $this->toArray());
                 }
                 $collection->load();
 

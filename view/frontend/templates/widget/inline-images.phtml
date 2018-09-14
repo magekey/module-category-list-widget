@@ -15,6 +15,7 @@
 if (($node = $block->getNode()) && $node->hasChildren()) {
     $exists = true;
     $level = (int)$block->getLevel();
+    $imageAttribute = $this->getData('image_attribute') ?: 'image';
     $columnsCount = (int)$this->getData('columns_count');
     $cssClass = !$level ? ' inline-images columns-' . $columnsCount : '';
     $_imageHelper = $this->helper(\MageKey\CategoryListWidget\Helper\Image::class);
@@ -37,7 +38,7 @@ if (($node = $block->getNode()) && $node->hasChildren()) {
             <a class="cat-item" href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
                 <div class="cat-image" style="<?= /* @escapeNotVerified */ $catImageStyle ?>">
                     <img alt="<?= /* @escapeNotVerified */ $child->getName() ?>"
-                        src="<?= /* @escapeNotVerified */ $_imageHelper->getImage('catalog/category/' . $child->getImage(), $image, $imageAttr) ?>" />
+                        src="<?= /* @escapeNotVerified */ $_imageHelper->getImage('catalog/category/' . $child->getData($imageAttribute), $image, $imageAttr) ?>" />
                 </div>
                 <div class="cat-name"><?= /* @escapeNotVerified */ $child->getName() ?></div>
             </a>
