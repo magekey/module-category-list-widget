@@ -125,6 +125,27 @@ class Widget extends \Magento\Framework\View\Element\Template implements BlockIn
     }
 
     /**
+     * Get options
+     *
+     * @return string
+     */
+    public function getOptions()
+    {
+        if (!$this->hasData('options')) {
+            $displayMode = $this->getDisplayMode();
+            $options = [];
+            foreach ($this->getData() as $name => $value) {
+                if (strpos($name, $displayMode . '.') === 0) {
+                    $options[str_replace($displayMode . '.', '', $name)] = $value;
+                }
+            }
+            $options = new \Magento\Framework\DataObject($options);
+            $this->setData('options', $options);
+        }
+        return $this->getData('options');
+    }
+
+    /**
      * Retrieve category node
      *
      * @return Node|false
@@ -159,7 +180,7 @@ class Widget extends \Magento\Framework\View\Element\Template implements BlockIn
                 $collection = $categoryTree->getCollection();
                 $collection->addAttributeToFilter('is_active', 1);
                 if ($templateHandler) {
-                    $templateHandler->prepareCollection($collection, $this->toArray());
+                    $templateHandler->prepareCollection($collection, $this->getOptions());
                 }
                 $collection->load();
 

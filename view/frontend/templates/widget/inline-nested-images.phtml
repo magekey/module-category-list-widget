@@ -18,7 +18,7 @@ if (($node = $block->getNode()) && $node->hasChildren()) {
     $options = $block->getOptions();
     $imageAttribute = $options->getData('image_attribute') ?: 'image';
     $columnsCount = (int)$options->getData('columns_count');
-    $cssClass = !$level ? ' inline-images columns-' . $columnsCount : '';
+    $cssClass = !$level ? ' inline-images nested columns-' . $columnsCount : '';
     $_imageHelper = $this->helper(\MageKey\CategoryListWidget\Helper\Image::class);
     $image = 'mgk_categorylistwidget_inline_images';
     $mediaAttributes = $_imageHelper->getMediaAttributes($image);
@@ -30,12 +30,11 @@ if (($node = $block->getNode()) && $node->hasChildren()) {
     $catImageStyle .= 'height:' . $imageAttr['height'] . 'px;';
 }
 ?>
-<?php if (isset($exists)) : ?>
-    <?php if (!$level) : ?>
+<?php if (isset($exists)) : ?>    
     <ul class="items<?= /* @escapeNotVerified */ $cssClass ?>">
-    <?php endif; ?>
         <?php foreach ($node->getChildren() as $child) : ?>
         <li class="item">
+            <?php if (!$level) : ?>
             <a class="cat-item" href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
                 <div class="cat-image" style="<?= /* @escapeNotVerified */ $catImageStyle ?>">
                     <img alt="<?= /* @escapeNotVerified */ $child->getName() ?>"
@@ -43,10 +42,13 @@ if (($node = $block->getNode()) && $node->hasChildren()) {
                 </div>
                 <div class="cat-name"><?= /* @escapeNotVerified */ $child->getName() ?></div>
             </a>
-        </li>
+            <?php else : ?>
+            <a href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
+                <?= /* @escapeNotVerified */ $child->getName() ?>
+            </a>
+            <?php endif; ?>
             <?= /* @escapeNotVerified */ $block->setNode($child)->setLevel($level + 1)->toHtml() ?>
+        </li>
         <?php endforeach; ?>
-    <?php if (!$level) : ?>
     </ul>
-    <?php endif; ?>
 <?php endif; ?>

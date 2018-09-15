@@ -14,10 +14,10 @@ abstract class HandlerAbstract extends \Magento\Framework\DataObject
      * Prepare category collection
      *
      * @param CategoryCollection $collection
-     * @param array $options
+     * @param \Magento\Framework\DataObject $options
      * @return void
      */
-    public function prepareCollection(CategoryCollection $collection, array $options = [])
+    public function prepareCollection(CategoryCollection $collection, \Magento\Framework\DataObject $options)
     {
         return;
     }

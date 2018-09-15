@@ -22,6 +22,9 @@
 @mgk-category-list-widget__inline__item__margin: 0 0 1rem 0;
 @mgk-category-list-widget__inline__link__font-size: 1.4rem;
 
+// Inline Nested
+@mgk-category-list-widget__inline-nested__item__border-color: #eee;
+
 //
 //  Mixin
 //  _____________________________________________
@@ -98,6 +101,28 @@
                                 img {
                                     max-width: 100%;
                                     height: auto;
+                                }
+                            }
+                        }
+
+                        &.nested {
+                            > li {
+                                border: 1px solid @mgk-category-list-widget__inline-nested__item__border-color;
+
+                                > .items {
+                                    padding: 1rem;
+
+                                    .items {
+                                        margin-left: 1rem;
+                                    }
+                                    li {
+                                        margin: 0;
+
+                                        a {
+                                            text-align: left;
+                                            padding: 0 0.5rem;
+                                        }
+                                    }
                                 }
                             }
                         }

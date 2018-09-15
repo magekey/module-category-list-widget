@@ -12,14 +12,14 @@ class InlineImages extends HandlerAbstract
     /**
      * {@inheritdoc}
      */
-    public function prepareCollection(CategoryCollection $collection, array $options = [])
+    public function prepareCollection(CategoryCollection $collection, \Magento\Framework\DataObject $options)
     {
         $attributes = [
             'image'
         ];
 
-        if (!empty($options['image_attribute'])) {
-            $attributes[] = $options['image_attribute'];
+        if ($imageAttribute = $options->getData('image_attribute')) {
+            $attributes[] = $imageAttribute;
         }
 
         $collection->addAttributeToSelect(array_unique($attributes));

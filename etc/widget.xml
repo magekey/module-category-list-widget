@@ -34,32 +34,63 @@
                        source_model="MageKey\CategoryListWidget\Model\TemplateHandler\PoolOptions">
                 <label translate="true">Display Mode</label>
             </parameter>
-            <parameter name="image_attribute" xsi:type="select" required="true" visible="true" sort_order="45"
+            
+            <!-- Template: inline_images -->
+            <parameter name="inline_images.image_attribute" xsi:type="select" required="true" visible="true" sort_order="45"
                        source_model="MageKey\CategoryListWidget\Model\Config\Source\ImageAttributes">
                 <label translate="true">Image Attribute</label>
                 <depends>
                     <parameter name="display_mode" value="inline_images" />
                 </depends>
             </parameter>
-            <parameter name="columns_count" xsi:type="select" required="true" visible="true" sort_order="50"
+            <parameter name="inline_images.columns_count" xsi:type="select" required="true" visible="true" sort_order="50"
                        source_model="MageKey\CategoryListWidget\Model\Config\Source\ColumnsCount">
                 <label translate="true">Columns</label>
                 <depends>
                     <parameter name="display_mode" value="inline_images" />
                 </depends>
             </parameter>
-            <parameter name="image_width" xsi:type="text" required="false" visible="true" sort_order="55">
+            <parameter name="inline_images.image_width" xsi:type="text" required="false" visible="true" sort_order="55">
                 <label translate="true">Image Width</label>
                 <depends>
                     <parameter name="display_mode" value="inline_images" />
                 </depends>
             </parameter>
-            <parameter name="image_height" xsi:type="text" required="false" visible="true" sort_order="60">
+            <parameter name="inline_images.image_height" xsi:type="text" required="false" visible="true" sort_order="60">
                 <label translate="true">Image Height</label>
                 <depends>
                     <parameter name="display_mode" value="inline_images" />
                 </depends>
             </parameter>
+
+            <!-- Template: inline_nested_images -->
+            <parameter name="inline_nested_images.image_attribute" xsi:type="select" required="true" visible="true" sort_order="45"
+                       source_model="MageKey\CategoryListWidget\Model\Config\Source\ImageAttributes">
+                <label translate="true">Image Attribute</label>
+                <depends>
+                    <parameter name="display_mode" value="inline_nested_images" />
+                </depends>
+            </parameter>
+            <parameter name="inline_nested_images.columns_count" xsi:type="select" required="true" visible="true" sort_order="50"
+                       source_model="MageKey\CategoryListWidget\Model\Config\Source\ColumnsCount">
+                <label translate="true">Columns</label>
+                <depends>
+                    <parameter name="display_mode" value="inline_nested_images" />
+                </depends>
+            </parameter>
+            <parameter name="inline_nested_images.image_width" xsi:type="text" required="false" visible="true" sort_order="55">
+                <label translate="true">Image Width</label>
+                <depends>
+                    <parameter name="display_mode" value="inline_nested_images" />
+                </depends>
+            </parameter>
+            <parameter name="inline_nested_images.image_height" xsi:type="text" required="false" visible="true" sort_order="60">
+                <label translate="true">Image Height</label>
+                <depends>
+                    <parameter name="display_mode" value="inline_nested_images" />
+                </depends>
+            </parameter>
+
             <parameter name="template" xsi:type="select" visible="true" required="true" sort_order="100">
                 <label translate="true">Template</label>
                 <options>

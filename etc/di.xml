@@ -26,6 +26,11 @@
                 	<item name="template" xsi:type="string">MageKey_CategoryListWidget::widget/inline-images.phtml</item>
                 	<item name="source" xsi:type="string">MageKey\CategoryListWidget\Model\TemplateHandler\InlineImages</item>
                 </item>
+                <item name="inline_nested_images" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Inline Nested List with Images</item>
+                    <item name="template" xsi:type="string">MageKey_CategoryListWidget::widget/inline-nested-images.phtml</item>
+                    <item name="source" xsi:type="string">MageKey\CategoryListWidget\Model\TemplateHandler\InlineImages</item>
+                </item>
             </argument>
         </arguments>
     </type>
