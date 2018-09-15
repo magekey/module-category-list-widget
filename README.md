@@ -4,9 +4,14 @@
 
 ![alt text](https://raw.githubusercontent.com/magekey/module-category-list-widget/master/docs/images/preview.png)
 
-## Features:
+## Widgets:
 
 - "Category List" widget.
+
+## Templates:
+- Default List
+- Collapsible List
+- Inline List with Images
 
 ## Installing the Extension
 
