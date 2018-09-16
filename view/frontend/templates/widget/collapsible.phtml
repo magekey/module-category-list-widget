@@ -32,7 +32,7 @@ if (($node = $block->getNode()) && $node->hasChildren()) {
             <?php else : ?>
             class="item"
             <?php endif; ?>>
-            <a href="<?= /* @escapeNotVerified */ $child->getUrl() ?>" data-role="title">
+            <a class="item-link href="<?= /* @escapeNotVerified */ $child->getUrl() ?>" data-role="title">
                 <?= /* @escapeNotVerified */ $child->getName() ?>
             </a>
             <div class="items-container" data-role="content">

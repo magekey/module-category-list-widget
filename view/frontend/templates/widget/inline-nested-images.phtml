@@ -34,20 +34,22 @@ if (($node = $block->getNode()) && $node->hasChildren()) {
     <ul class="items<?= /* @escapeNotVerified */ $cssClass ?>">
         <?php foreach ($node->getChildren() as $child) : ?>
         <li class="item">
-            <?php if (!$level) : ?>
-            <a class="cat-item" href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
-                <div class="cat-image" style="<?= /* @escapeNotVerified */ $catImageStyle ?>">
-                    <img alt="<?= /* @escapeNotVerified */ $child->getName() ?>"
-                        src="<?= /* @escapeNotVerified */ $_imageHelper->getImage('catalog/category/' . $child->getData($imageAttribute), $image, $imageAttr) ?>" />
-                </div>
-                <div class="cat-name"><?= /* @escapeNotVerified */ $child->getName() ?></div>
-            </a>
-            <?php else : ?>
-            <a href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
-                <?= /* @escapeNotVerified */ $child->getName() ?>
-            </a>
-            <?php endif; ?>
-            <?= /* @escapeNotVerified */ $block->setNode($child)->setLevel($level + 1)->toHtml() ?>
+            <div class="item-container">
+                <?php if (!$level) : ?>
+                <a class="item-link" href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
+                    <div class="item-image" style="<?= /* @escapeNotVerified */ $catImageStyle ?>">
+                        <img alt="<?= /* @escapeNotVerified */ $child->getName() ?>"
+                            src="<?= /* @escapeNotVerified */ $_imageHelper->getImage('catalog/category/' . $child->getData($imageAttribute), $image, $imageAttr) ?>" />
+                    </div>
+                    <div class="item-name"><?= /* @escapeNotVerified */ $child->getName() ?></div>
+                </a>
+                <?php else : ?>
+                <a href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
+                    <?= /* @escapeNotVerified */ $child->getName() ?>
+                </a>
+                <?php endif; ?>
+                <?= /* @escapeNotVerified */ $block->setNode($child)->setLevel($level + 1)->toHtml() ?>
+            </div>
         </li>
         <?php endforeach; ?>
     </ul>

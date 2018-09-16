@@ -36,13 +36,15 @@ if (($node = $block->getNode()) && $node->hasChildren()) {
     <?php endif; ?>
         <?php foreach ($node->getChildren() as $child) : ?>
         <li class="item">
-            <a class="cat-item" href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
-                <div class="cat-image" style="<?= /* @escapeNotVerified */ $catImageStyle ?>">
-                    <img alt="<?= /* @escapeNotVerified */ $child->getName() ?>"
-                        src="<?= /* @escapeNotVerified */ $_imageHelper->getImage('catalog/category/' . $child->getData($imageAttribute), $image, $imageAttr) ?>" />
-                </div>
-                <div class="cat-name"><?= /* @escapeNotVerified */ $child->getName() ?></div>
-            </a>
+            <div class="item-container">
+                <a class="item-link" href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
+                    <div class="item-image" style="<?= /* @escapeNotVerified */ $catImageStyle ?>">
+                        <img alt="<?= /* @escapeNotVerified */ $child->getName() ?>"
+                            src="<?= /* @escapeNotVerified */ $_imageHelper->getImage('catalog/category/' . $child->getData($imageAttribute), $image, $imageAttr) ?>" />
+                    </div>
+                    <div class="item-name"><?= /* @escapeNotVerified */ $child->getName() ?></div>
+                </a>
+            </div>
         </li>
             <?= /* @escapeNotVerified */ $block->setNode($child)->setLevel($level + 1)->toHtml() ?>
         <?php endforeach; ?>

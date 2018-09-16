@@ -19,11 +19,8 @@
 // Inline
 @mgk-category-list-widget__inline__item__columns_max: 12;
 @mgk-category-list-widget__inline__item__padding: 1rem;
-@mgk-category-list-widget__inline__item__margin: 0 0 1rem 0;
 @mgk-category-list-widget__inline__link__font-size: 1.4rem;
-
-// Inline Nested
-@mgk-category-list-widget__inline-nested__item__border-color: #eee;
+@mgk-category-list-widget__inline__item__border-color: #eee;
 
 //
 //  Mixin
@@ -48,10 +45,10 @@
             &-content {
                 .items {
                     &.default {
-                        li {
+                        .item {
                             margin: 0;
 
-                            ul {
+                            .items {
                                 margin-left: @mgk-category-list-widget__default__items__offset;
                             }
                         }
@@ -59,6 +56,7 @@
                     &.collapsible {
                         .item.collapsible {
                             > a {
+                                cursor: pointer;
 
                                 .lib-icon-font(
                                 @_icon-font-content: @mgk-category-list-widget__collapsible__icon__content,
@@ -83,20 +81,26 @@
                         display: flex;
                         flex-wrap: wrap;
                         
-                        > li {
-                            margin: @mgk-category-list-widget__inline__item__margin;
-                            
-                            a {
+                        > .item {
+                            margin: 0;
+
+                            > .item-container {
+                                margin: 0.5rem;
+                                border: 1px solid @mgk-category-list-widget__inline__item__border-color;
+                            }
+                            .item-link {
                                 font-size: @mgk-category-list-widget__inline__link__font-size;
                                 display: block;
                                 padding: @mgk-category-list-widget__inline__item__padding;
                                 text-align: center;
 
-                                .cat-image {
-                                    margin: 0 auto;
-                                }
-                                .cat-name {
-                                    margin-top: 1rem;
+                                .item {
+                                    &-image {
+                                        margin: 0 auto;
+                                    }
+                                    &-name {
+                                        margin-top: 1rem;
+                                    }
                                 }
                                 img {
                                     max-width: 100%;
@@ -106,22 +110,23 @@
                         }
 
                         &.nested {
-                            > li {
-                                border: 1px solid @mgk-category-list-widget__inline-nested__item__border-color;
+                            .items {
+                                margin-left: 1rem;
 
-                                > .items {
-                                    padding: 1rem;
+                                .item {
+                                    margin: 0;
 
-                                    .items {
-                                        margin-left: 1rem;
+                                    &-link {
+                                        text-align: left;
+                                        padding: 0 0.5rem;
                                     }
-                                    li {
+                                }
+                            }
+                            > .item {
+                                > .item-container {
+                                    > .items {
+                                        padding: 1rem;
                                         margin: 0;
-
-                                        a {
-                                            text-align: left;
-                                            padding: 0 0.5rem;
-                                        }
                                     }
                                 }
                             }

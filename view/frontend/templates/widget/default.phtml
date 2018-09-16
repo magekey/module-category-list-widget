@@ -22,7 +22,7 @@ if (($node = $block->getNode()) && $node->hasChildren()) {
     <ul class="items <?= /* @escapeNotVerified */ $cssClass ?>">
         <?php foreach ($node->getChildren() as $child) : ?>
         <li class="item">
-            <a href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
+            <a class="item-link" href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
                 <?= /* @escapeNotVerified */ $child->getName() ?>
             </a>
             <?= /* @escapeNotVerified */ $block->setNode($child)->setLevel($level + 1)->toHtml() ?>
