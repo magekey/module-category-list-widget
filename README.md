@@ -12,6 +12,7 @@
 - Default List
 - Collapsible List
 - Inline List with Images
+- Inline Nested List with Images
 
 ## Installing the Extension
 

@@ -48,7 +48,9 @@ if (($node = $block->getNode()) && $node->hasChildren()) {
                     <?= /* @escapeNotVerified */ $child->getName() ?>
                 </a>
                 <?php endif; ?>
-                <?= /* @escapeNotVerified */ $block->setNode($child)->setLevel($level + 1)->toHtml() ?>
+                <div class="items-container">
+                    <?= /* @escapeNotVerified */ $block->setNode($child)->setLevel($level + 1)->toHtml() ?>
+                </div>
             </div>
         </li>
         <?php endforeach; ?>
