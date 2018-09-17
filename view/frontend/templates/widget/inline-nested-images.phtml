@@ -63,6 +63,12 @@ if (($node = $block->getNode()) && $node->hasChildren()) {
                 </div>
                 <?php endif; ?>
             <?php if (!$level) : ?>
+                <div <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['actions']) ?>>
+                    <a class="action primary <?= /* @escapeNotVerified */ $_decorator->renderClass($child, ['action']) ?>"
+                       href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
+                        <?= /* @escapeNotVerified */ __('View All') ?>
+                    </a>
+                </div>
             </div>
             <?php endif; ?>
         </li>
