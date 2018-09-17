@@ -14,30 +14,33 @@
 
 if (($node = $block->getNode()) && $node->hasChildren()) {
     $exists = true;
-    $level = (int)$block->getLevel();
-    $cssClass = !$level ? 'default collapsible' : '';
-    $isCollapsible = !$level;
+    $level = (int)$node->getClwLevel();
+    $node->setHasCollapsed(!$level);
+    $_decorator = $this->helper(\MageKey\CategoryListWidget\Helper\Decorator::class);
 }
 ?>
 <?php if (isset($exists)) : ?>
-    <ul class="items <?= /* @escapeNotVerified */ $cssClass ?>">
+    <ul <?= /* @escapeNotVerified */ $_decorator->renderAttributes($node, ['list']) ?>>
         <?php foreach ($node->getChildren() as $child) : ?>
-        <li <?php if ($isCollapsible) : ?>
-            class="item collapsible"
+        <?php $child->setClwLevel($level + 1); ?>
+        <li <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['item']) ?>
+            <?php if ($node->getHasCollapsed()) : ?>
             data-mage-init='{
                 "collapsible":{
                     "openedState": "active"
                 }
             }'
-            <?php else : ?>
-            class="item"
             <?php endif; ?>>
-            <a class="item-link href="<?= /* @escapeNotVerified */ $child->getUrl() ?>" data-role="title">
+            <a <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['link']) ?>
+               href="<?= /* @escapeNotVerified */ $child->getUrl() ?>" data-role="title">
                 <?= /* @escapeNotVerified */ $child->getName() ?>
             </a>
-            <div class="items-container" data-role="content">
-                <?= /* @escapeNotVerified */ $block->setNode($child)->setLevel($level + 1)->toHtml() ?>
+            <?php if ($child->hasChildren()) : ?>
+            <div <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['container']) ?>
+                 data-role="content">
+                <?= /* @escapeNotVerified */ $block->setNode($child)->toHtml() ?>
             </div>
+            <?php endif; ?>
         </li>
         <?php endforeach; ?>
     </ul>

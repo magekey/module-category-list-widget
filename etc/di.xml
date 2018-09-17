@@ -19,7 +19,7 @@
                 <item name="collapsible" xsi:type="array">
                     <item name="title" xsi:type="string" translate="true">Collapsible List</item>
                     <item name="template" xsi:type="string">MageKey_CategoryListWidget::widget/collapsible.phtml</item>
-                    <item name="source" xsi:type="string">MageKey\CategoryListWidget\Model\TemplateHandler\DefaultList</item>
+                    <item name="source" xsi:type="string">MageKey\CategoryListWidget\Model\TemplateHandler\Collapsible</item>
                 </item>
                 <item name="inline_images" xsi:type="array">
                     <item name="title" xsi:type="string" translate="true">Inline List with Images</item>
@@ -29,7 +29,7 @@
                 <item name="inline_nested_images" xsi:type="array">
                     <item name="title" xsi:type="string" translate="true">Inline Nested List with Images</item>
                     <item name="template" xsi:type="string">MageKey_CategoryListWidget::widget/inline-nested-images.phtml</item>
-                    <item name="source" xsi:type="string">MageKey\CategoryListWidget\Model\TemplateHandler\InlineImages</item>
+                    <item name="source" xsi:type="string">MageKey\CategoryListWidget\Model\TemplateHandler\InlineNestedImages</item>
                 </item>
             </argument>
         </arguments>

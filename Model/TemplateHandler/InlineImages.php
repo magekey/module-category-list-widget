@@ -7,7 +7,7 @@ namespace MageKey\CategoryListWidget\Model\TemplateHandler;
 
 use Magento\Catalog\Model\ResourceModel\Category\Collection as CategoryCollection;
 
-class InlineImages extends HandlerAbstract
+class InlineImages extends DefaultList
 {
     /**
      * {@inheritdoc}
@@ -23,5 +23,13 @@ class InlineImages extends HandlerAbstract
         }
 
         $collection->addAttributeToSelect(array_unique($attributes));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getWrapperType()
+    {
+        return ['inline-images'];
     }
 }

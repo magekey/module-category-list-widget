@@ -14,11 +14,12 @@
 
 if (($node = $block->getNode()) && $node->hasChildren()) {
     $exists = true;
-    $level = (int)$block->getLevel();
+    $level = (int)$node->getClwLevel();
+
     $options = $block->getOptions();
     $imageAttribute = $options->getData('image_attribute') ?: 'image';
     $columnsCount = (int)$options->getData('columns_count');
-    $cssClass = !$level ? ' inline-images nested columns-' . $columnsCount : '';
+
     $_imageHelper = $this->helper(\MageKey\CategoryListWidget\Helper\Image::class);
     $image = 'mgk_categorylistwidget_inline_images';
     $mediaAttributes = $_imageHelper->getMediaAttributes($image);
@@ -26,32 +27,44 @@ if (($node = $block->getNode()) && $node->hasChildren()) {
         'width' => $options->getData('image_width') ?: $mediaAttributes['width'],
         'height' => $options->getData('image_height') ?: $mediaAttributes['height'],
     ];
-    $catImageStyle = 'width:' . $imageAttr['width'] . 'px;';
-    $catImageStyle .= 'height:' . $imageAttr['height'] . 'px;';
+    $imageStyle = 'width:' . $imageAttr['width'] . 'px;';
+    $imageStyle .= 'height:' . $imageAttr['height'] . 'px;';
+
+    $_decorator = $this->helper(\MageKey\CategoryListWidget\Helper\Decorator::class);
 }
 ?>
-<?php if (isset($exists)) : ?>    
-    <ul class="items<?= /* @escapeNotVerified */ $cssClass ?>">
+<?php if (isset($exists)) : ?>
+    <ul <?= /* @escapeNotVerified */ $_decorator->renderAttributes($node, ['list', 'columns-' . $columnsCount]) ?>>
         <?php foreach ($node->getChildren() as $child) : ?>
-        <li class="item">
-            <div class="item-container">
+        <?php $child->setClwLevel($level + 1); ?>
+        <li <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['item']) ?>>
+            <?php if (!$level) : ?>
+            <div <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['container']) ?>>
+            <?php endif; ?>
                 <?php if (!$level) : ?>
-                <a class="item-link" href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
-                    <div class="item-image" style="<?= /* @escapeNotVerified */ $catImageStyle ?>">
+                <a <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['link']) ?>
+                   href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
+                    <div <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['image']) ?>
+                         style="<?= /* @escapeNotVerified */ $imageStyle ?>">
                         <img alt="<?= /* @escapeNotVerified */ $child->getName() ?>"
-                            src="<?= /* @escapeNotVerified */ $_imageHelper->getImage('catalog/category/' . $child->getData($imageAttribute), $image, $imageAttr) ?>" />
+                             src="<?= /* @escapeNotVerified */ $_imageHelper->getImage('catalog/category/' . $child->getData($imageAttribute), $image, $imageAttr) ?>" />
                     </div>
-                    <div class="item-name"><?= /* @escapeNotVerified */ $child->getName() ?></div>
+                    <div <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['name']) ?>><?= /* @escapeNotVerified */ $child->getName() ?></div>
                 </a>
                 <?php else : ?>
-                <a href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
+                <a <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['link']) ?>
+                   href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
                     <?= /* @escapeNotVerified */ $child->getName() ?>
                 </a>
                 <?php endif; ?>
-                <div class="items-container">
-                    <?= /* @escapeNotVerified */ $block->setNode($child)->setLevel($level + 1)->toHtml() ?>
+                <?php if ($child->hasChildren()) : ?>
+                <div <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['sub-items']) ?>>
+                    <?= /* @escapeNotVerified */ $block->setNode($child)->toHtml() ?>
                 </div>
+                <?php endif; ?>
+            <?php if (!$level) : ?>
             </div>
+            <?php endif; ?>
         </li>
         <?php endforeach; ?>
     </ul>

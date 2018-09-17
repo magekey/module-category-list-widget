@@ -7,32 +7,38 @@
 //  Variables
 //  _____________________________________________
 
+// Common
+@mgk-clw__link__font-size: inherit;
+@mgk-clw__link__color: inherit;
+
 // Default
-@mgk-category-list-widget__default__items__offset: 1rem;
+@mgk-clw-default__list__offset: 1rem;
 
 // Collapsible
-@mgk-category-list-widget__collapsible__icon__content: @icon-down;
-@mgk-category-list-widget__collapsible__icon__position: after;
-@mgk-category-list-widget__collapsible__icon__size: 9px;
-@mgk-category-list-widget__collapsible__icon-active__content: @icon-up;
+@mgk-clw-collapsible__icon__content: @icon-down;
+@mgk-clw-collapsible__icon__size: 9px;
+@mgk-clw-collapsible__icon__position: after;
+@mgk-clw-collapsible__icon-active__content: @icon-up;
 
 // Inline
-@mgk-category-list-widget__inline__item__columns_max: 12;
-@mgk-category-list-widget__inline__item__padding: 1rem;
-@mgk-category-list-widget__inline__link__font-size: 1.4rem;
-@mgk-category-list-widget__inline__item__border-color: #eee;
+@mgk-clw-inline__item__border-color: #eee;
+@mgk-clw-inline__item__columns-max: 12;
+@mgk-clw-inline__item__padding: 1rem;
+
+// Inline Nested
+@mgk-clw-inline-nested__link__font-size: 1.3rem;
 
 //
 //  Mixin
 //  _____________________________________________
 
-.mgk-category-list-widget-generate-columns(@n, @i: 1) when (@i =< @n) {
-    &.columns-@{i} {
-        > li {
+.mgk-clw-generate-columns(@n, @i: 1) when (@i =< @n) {
+    &.clw-columns-@{i} {
+        > .clw-item {
             width: (100% / @i);
         }
     }
-    .mgk-category-list-widget-generate-columns(@n, (@i + 1));
+    .mgk-clw-generate-columns(@n, (@i + 1));
 }
 
 //
@@ -40,95 +46,102 @@
 //  _____________________________________________
 
 & when (@media-common = true) {
-    .block-mgk-category-list-widget {
-        .block {
-            &-content {
-                .items {
-                    &.default {
-                        .item {
-                            margin: 0;
+    .mgk-category-list-widget {
+        .clw {
+            &-list {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+            &-item {
+                margin: 0;
+            }
+            &-link {
+                font-size: @mgk-clw__link__font-size;
+                color: @mgk-clw__link__color;
+            }
 
-                            .items {
-                                margin-left: @mgk-category-list-widget__default__items__offset;
-                            }
-                        }
+            &-default {
+                .clw {
+                    &-list {
+                        margin-left: @mgk-clw-default__list__offset;
                     }
-                    &.collapsible {
-                        .item.collapsible {
-                            > a {
-                                cursor: pointer;
+                }
+            }
+            &-collapsible {
+                .clw {
+                    &-list {
+                        &.has-collapsed {
+                            > .clw-item.has-children {
+                                > .clw-link {
+                                    .lib-icon-font(
+                                        @_icon-font-content: @mgk-clw-collapsible__icon__content,
+                                        @_icon-font-size: @mgk-clw-collapsible__icon__size,
+                                        @_icon-font-position: @mgk-clw-collapsible__icon__position,
+                                        @_icon-font-display: block
+                                    );
 
-                                .lib-icon-font(
-                                @_icon-font-content: @mgk-category-list-widget__collapsible__icon__content,
-                                @_icon-font-size: @mgk-category-list-widget__collapsible__icon__size,
-                                @_icon-font-position: @mgk-category-list-widget__collapsible__icon__position,
-                                @_icon-font-display: block
-                                );
-
-                                &:after {
-                                    margin-left: 1rem;
+                                    &:after {
+                                        margin-left: 1rem;
+                                    }
+                                }
+                                &.active {
+                                    > .clw-link {
+                                        .lib-icon-font-symbol(
+                                            @_icon-font-content: @mgk-clw-collapsible__icon-active__content,
+                                            @_icon-font-position: @mgk-clw-collapsible__icon__position
+                                        );
+                                    }
                                 }
                             }
-                            &.active > a {
-                                .lib-icon-font-symbol(
-                                    @_icon-font-content: @mgk-category-list-widget__collapsible__icon-active__content,
-                                    @_icon-font-position: @mgk-category-list-widget__collapsible__icon__position
-                                );
-                            }
                         }
                     }
-                    &.inline-images {
+                }
+            }
+            &-inline-images {
+                .clw {
+                    &-list {
                         display: flex;
                         flex-wrap: wrap;
-                        
-                        > .item {
-                            margin: 0;
+                    }
+                    &-container {
+                        margin: 0.5rem;
+                        border: 1px solid @mgk-clw-inline__item__border-color;
+                    }
+                    &-link {
+                        display: block;
+                        padding: @mgk-clw-inline__item__padding;
+                        text-align: center;
 
-                            > .item-container {
-                                margin: 0.5rem;
-                                border: 1px solid @mgk-category-list-widget__inline__item__border-color;
-                            }
-                            .item-link {
-                                font-size: @mgk-category-list-widget__inline__link__font-size;
-                                display: block;
-                                padding: @mgk-category-list-widget__inline__item__padding;
-                                text-align: center;
-
-                                .item {
-                                    &-image {
-                                        margin: 0 auto;
-                                    }
-                                    &-name {
-                                        margin-top: 1rem;
-                                    }
-                                }
-                                img {
-                                    max-width: 100%;
-                                    height: auto;
-                                }
-                            }
+                        img {
+                            max-width: 100%;
+                            height: auto;
                         }
+                    }
+                    &-image {
+                        margin: 0 auto;
+                    }
+                    &-name {
+                        margin-top: 1rem;
+                    }
+                }
+            }
+            &-inline-nested-images {
+                .clw {
+                    &-sub-items {
+                        margin-left: @mgk-clw-default__list__offset;
 
-                        &.nested {
-                            .items {
-                                margin-left: 1rem;
-
-                                .item {
-                                    margin: 0;
-
-                                    &-link {
-                                        text-align: left;
-                                        padding: 0 0.5rem;
-                                    }
-                                }
+                        &.level-1 {
+                            padding: 1rem;
+                        }
+                        .clw {
+                            &-list {
+                                display: block;
                             }
-                            > .item {
-                                > .item-container {
-                                    > .items {
-                                        padding: 1rem;
-                                        margin: 0;
-                                    }
-                                }
+                            &-link {
+                                text-align: left;
+                                padding: 0;
+                                font-size: @mgk-clw-inline-nested__link__font-size;
                             }
                         }
                     }
@@ -143,12 +156,12 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    .block-mgk-category-list-widget {
-        .block {
-            &-content {
-                .items {
-                    &.inline-images {
-                        .mgk-category-list-widget-generate-columns(@mgk-category-list-widget__inline__item__columns_max);
+    .mgk-category-list-widget {
+        .clw {
+            &-inline-images {
+                > .clw {
+                    &-list {
+                        .mgk-clw-generate-columns(@mgk-clw-inline__item__columns-max);
                     }
                 }
             }
@@ -161,14 +174,12 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    .block-mgk-category-list-widget {
-        .block {
-            &-content {
-                .items {
-                    &.inline-images {
-                        > li {
-                            width: 50%;
-                        }
+    .mgk-category-list-widget {
+        .clw {
+            &-inline-images {
+                > .clw-list {
+                    > .clw-item {
+                        width: 50%;
                     }
                 }
             }

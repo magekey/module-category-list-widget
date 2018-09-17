@@ -14,18 +14,20 @@
 
 if (($node = $block->getNode()) && $node->hasChildren()) {
     $exists = true;
-    $level = (int)$block->getLevel();
-    $cssClass = !$level ? 'default' : '';
+    $level = (int)$node->getClwLevel();
+    $_decorator = $this->helper(\MageKey\CategoryListWidget\Helper\Decorator::class);
 }
 ?>
 <?php if (isset($exists)) : ?>
-    <ul class="items <?= /* @escapeNotVerified */ $cssClass ?>">
+    <ul <?= /* @escapeNotVerified */ $_decorator->renderAttributes($node, ['list']) ?>>
         <?php foreach ($node->getChildren() as $child) : ?>
-        <li class="item">
-            <a class="item-link" href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
+        <?php $child->setClwLevel($level + 1); ?>
+        <li <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['item']) ?>>
+            <a <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['link']) ?>
+               href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
                 <?= /* @escapeNotVerified */ $child->getName() ?>
             </a>
-            <?= /* @escapeNotVerified */ $block->setNode($child)->setLevel($level + 1)->toHtml() ?>
+            <?= /* @escapeNotVerified */ $block->setNode($child)->toHtml() ?>
         </li>
         <?php endforeach; ?>
     </ul>
