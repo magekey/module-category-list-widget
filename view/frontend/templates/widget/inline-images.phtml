@@ -19,6 +19,7 @@ if (($node = $block->getNode()) && $node->hasChildren()) {
     $options = $block->getOptions();
     $imageAttribute = $options->getData('image_attribute') ?: 'image';
     $columnsCount = (int)$options->getData('columns_count');
+    $viewButton = (string)$options->getData('view_button');
 
     $_imageHelper = $this->helper(\MageKey\CategoryListWidget\Helper\Image::class);
     $image = 'mgk_categorylistwidget_inline_images';
@@ -38,21 +39,29 @@ if (($node = $block->getNode()) && $node->hasChildren()) {
     <ul <?= /* @escapeNotVerified */ $_decorator->renderAttributes($node, ['list', 'columns-' . $columnsCount]) ?>>
     <?php endif; ?>
         <?php foreach ($node->getChildren() as $child) : ?>
-        <?php $child->setClwLevel($level + 1); ?>
-        <li <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['item']) ?>>
-            <div <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['container']) ?>>
-                <a <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['link']) ?>
-                   href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
-                    <div <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['image']) ?>
-                         style="<?= /* @escapeNotVerified */ $imageStyle ?>">
-                        <img alt="<?= /* @escapeNotVerified */ $child->getName() ?>"
-                             src="<?= /* @escapeNotVerified */ $_imageHelper->getImage('catalog/category/' . $child->getData($imageAttribute), $image, $imageAttr) ?>" />
+            <?php $child->setClwLevel($level + 1); ?>
+            <li <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['item']) ?>>
+                <div <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['container']) ?>>
+                    <a <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['link']) ?>
+                       href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
+                        <div <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['image']) ?>
+                             style="<?= /* @escapeNotVerified */ $imageStyle ?>">
+                            <img alt="<?= /* @escapeNotVerified */ $child->getName() ?>"
+                                 src="<?= /* @escapeNotVerified */ $_imageHelper->getImage('catalog/category/' . $child->getData($imageAttribute), $image, $imageAttr) ?>" />
+                        </div>
+                        <div <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['name']) ?>><?= /* @escapeNotVerified */ $child->getName() ?></div>
+                    </a>
+                    <?php if ($viewButton) : ?>
+                    <div <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['actions']) ?>>
+                        <a class="action primary <?= /* @escapeNotVerified */ $_decorator->renderClass($child, ['action']) ?>"
+                           href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
+                            <?= /* @escapeNotVerified */ __($viewButton) ?>
+                        </a>
                     </div>
-                    <div <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['name']) ?>><?= /* @escapeNotVerified */ $child->getName() ?></div>
-                </a>
-            </div>
-        </li>
-        <?= /* @escapeNotVerified */ $block->setNode($child)->toHtml() ?>
+                    <?php endif; ?>
+                </div>
+            </li>
+            <?= /* @escapeNotVerified */ $block->setNode($child)->toHtml() ?>
         <?php endforeach; ?>
     <?php if (!$level) : ?>
     </ul>

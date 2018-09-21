@@ -62,6 +62,13 @@
                     <parameter name="display_mode" value="inline_images" />
                 </depends>
             </parameter>
+            <parameter name="inline_images.view_button" xsi:type="text" required="false" visible="true" sort_order="70">
+                <label translate="true">View Button</label>
+                <depends>
+                    <parameter name="display_mode" value="inline_images" />
+                </depends>
+                <value>View</value>
+            </parameter>
 
             <!-- Template: inline_nested_images -->
             <parameter name="inline_nested_images.image_attribute" xsi:type="select" required="true" visible="true" sort_order="45"
@@ -89,6 +96,13 @@
                 <depends>
                     <parameter name="display_mode" value="inline_nested_images" />
                 </depends>
+            </parameter>
+            <parameter name="inline_nested_images.view_button" xsi:type="text" required="false" visible="true" sort_order="70">
+                <label translate="true">View Button</label>
+                <depends>
+                    <parameter name="display_mode" value="inline_nested_images" />
+                </depends>
+                <value>View All</value>
             </parameter>
 
             <parameter name="template" xsi:type="select" visible="true" required="true" sort_order="100">

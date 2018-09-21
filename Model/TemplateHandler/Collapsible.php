@@ -7,7 +7,7 @@ namespace MageKey\CategoryListWidget\Model\TemplateHandler;
 
 class Collapsible extends DefaultList
 {
-	/**
+    /**
      * Retrieve wrapper class
      *
      * @return array

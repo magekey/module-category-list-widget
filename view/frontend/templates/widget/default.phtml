@@ -21,14 +21,14 @@ if (($node = $block->getNode()) && $node->hasChildren()) {
 <?php if (isset($exists)) : ?>
     <ul <?= /* @escapeNotVerified */ $_decorator->renderAttributes($node, ['list']) ?>>
         <?php foreach ($node->getChildren() as $child) : ?>
-        <?php $child->setClwLevel($level + 1); ?>
-        <li <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['item']) ?>>
-            <a <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['link']) ?>
-               href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
-                <?= /* @escapeNotVerified */ $child->getName() ?>
-            </a>
-            <?= /* @escapeNotVerified */ $block->setNode($child)->toHtml() ?>
-        </li>
+            <?php $child->setClwLevel($level + 1); ?>
+            <li <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['item']) ?>>
+                <a <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['link']) ?>
+                   href="<?= /* @escapeNotVerified */ $child->getUrl() ?>">
+                    <?= /* @escapeNotVerified */ $child->getName() ?>
+                </a>
+                <?= /* @escapeNotVerified */ $block->setNode($child)->toHtml() ?>
+            </li>
         <?php endforeach; ?>
     </ul>
 <?php endif; ?>

@@ -10,7 +10,7 @@ use Magento\Catalog\Model\ResourceModel\Category\Collection as CategoryCollectio
 
 class DefaultList extends \Magento\Framework\DataObject
 {
-	/**
+    /**
      * Prepare category collection
      *
      * @param CategoryCollection $collection
@@ -35,7 +35,7 @@ class DefaultList extends \Magento\Framework\DataObject
         ];
     }
 
-	/**
+    /**
      * Retrieve wrapper class
      *
      * @return array

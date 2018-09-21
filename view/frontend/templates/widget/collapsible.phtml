@@ -22,26 +22,26 @@ if (($node = $block->getNode()) && $node->hasChildren()) {
 <?php if (isset($exists)) : ?>
     <ul <?= /* @escapeNotVerified */ $_decorator->renderAttributes($node, ['list']) ?>>
         <?php foreach ($node->getChildren() as $child) : ?>
-        <?php $child->setClwLevel($level + 1); ?>
-        <li <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['item']) ?>
-            <?php if ($node->getHasCollapsed()) : ?>
-            data-mage-init='{
-                "collapsible":{
-                    "openedState": "active"
-                }
-            }'
-            <?php endif; ?>>
-            <a <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['link']) ?>
-               href="<?= /* @escapeNotVerified */ $child->getUrl() ?>" data-role="title">
-                <?= /* @escapeNotVerified */ $child->getName() ?>
-            </a>
-            <?php if ($child->hasChildren()) : ?>
-            <div <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['container']) ?>
-                 data-role="content">
-                <?= /* @escapeNotVerified */ $block->setNode($child)->toHtml() ?>
-            </div>
-            <?php endif; ?>
-        </li>
+            <?php $child->setClwLevel($level + 1); ?>
+            <li <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['item']) ?>
+                <?php if ($node->getHasCollapsed()) : ?>
+                data-mage-init='{
+                    "collapsible":{
+                        "openedState": "active"
+                    }
+                }'
+                <?php endif; ?>>
+                <a <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['link']) ?>
+                   href="<?= /* @escapeNotVerified */ $child->getUrl() ?>" data-role="title">
+                    <?= /* @escapeNotVerified */ $child->getName() ?>
+                </a>
+                <?php if ($child->hasChildren()) : ?>
+                <div <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['container']) ?>
+                     data-role="content">
+                    <?= /* @escapeNotVerified */ $block->setNode($child)->toHtml() ?>
+                </div>
+                <?php endif; ?>
+            </li>
         <?php endforeach; ?>
     </ul>
 <?php endif; ?>
