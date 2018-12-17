@@ -127,7 +127,7 @@ class Widget extends \Magento\Framework\View\Element\Template implements BlockIn
     /**
      * Get options
      *
-     * @return string
+     * @return \Magento\Framework\DataObject
      */
     public function getOptions()
     {
@@ -176,11 +176,17 @@ class Widget extends \Magento\Framework\View\Element\Template implements BlockIn
                 }
 
                 $categoryNode->loadChildren($this->getRecursionLevel());
-                $categoryTree->addCollectionData(null, true, [], false, false);
+                $categoryTree->addCollectionData(null, false, [], false, false);
                 $collection = $categoryTree->getCollection();
                 $collection->addAttributeToFilter('is_active', 1);
                 if ($templateHandler) {
                     $templateHandler->prepareCollection($collection, $this->getOptions());
+                }
+
+                if ($sortBy = $this->getSortBy()) {
+                    $collection->addAttributeToSort($sortBy);
+                } else {
+                    $collection->addAttributeToSort('position');
                 }
                 $collection->load();
 

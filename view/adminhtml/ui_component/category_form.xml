@@ -58,4 +58,12 @@
             </formElements>
         </field>
     </fieldset>
+    <fieldset name="display_settings">
+        <field name="list_widget_position" sortOrder="115" formElement="input">
+            <settings>
+                <dataType>number</dataType>
+                <label translate="true">List Widget Position</label>
+            </settings>
+        </field>
+    </fieldset>
 </form>

@@ -25,6 +25,10 @@
                     </data>
                 </block>
             </parameter>
+            <parameter name="sort_by" xsi:type="select" required="false" visible="true" sort_order="25"
+                       source_model="MageKey\CategoryListWidget\Model\Config\Source\SortAttributes">
+                <label translate="true">Sort by Attribute</label>
+            </parameter>
             <parameter name="recursion_level" xsi:type="text" visible="true" sort_order="30">
                 <label translate="true">Recursion Level</label>
                 <description translate="true">Leave empty to use all sub categories.</description>
