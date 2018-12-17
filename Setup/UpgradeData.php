@@ -88,7 +88,6 @@ class UpgradeData implements UpgradeDataInterface
                     'required' => false,
                     'sort_order' => 30,
                     'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_STORE,
-                    'group' => 'Display Settings',
                 ]
             );
         }
