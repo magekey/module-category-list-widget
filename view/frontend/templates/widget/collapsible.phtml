@@ -15,7 +15,7 @@
 if (($node = $block->getNode()) && $node->hasChildren()) {
     $exists = true;
     $level = (int)$node->getClwLevel();
-    $node->setHasCollapsed(!$level);
+    $node->setHasCollapsed(true);
     $_decorator = $this->helper(\MageKey\CategoryListWidget\Helper\Decorator::class);
 }
 ?>
