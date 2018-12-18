@@ -74,23 +74,53 @@
             }
             &-collapsible {
                 .clw {
-                    &-list {
+                    &-item {
                         &.has-collapsed {
-                            > .clw-item.has-children {
+                            > .clw-link {
+                                .lib-icon-font(
+                                    @_icon-font-content: @mgk-clw-collapsible__icon__content,
+                                    @_icon-font-size: @mgk-clw-collapsible__icon__size,
+                                    @_icon-font-position: @mgk-clw-collapsible__icon__position,
+                                    @_icon-font-display: block
+                                );
+
+                                &:after {
+                                    margin-left: 1rem;
+                                }
+                            }
+                            &.active {
                                 > .clw-link {
+                                    .lib-icon-font-symbol(
+                                        @_icon-font-content: @mgk-clw-collapsible__icon-active__content,
+                                        @_icon-font-position: @mgk-clw-collapsible__icon__position
+                                    );
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &-collapsible-multiple {
+                .clw {
+                    &-item {
+                        &.has-collapsed {
+                            > .clw-link {
+                                .clw-link-icon {
                                     .lib-icon-font(
                                         @_icon-font-content: @mgk-clw-collapsible__icon__content,
                                         @_icon-font-size: @mgk-clw-collapsible__icon__size,
                                         @_icon-font-position: @mgk-clw-collapsible__icon__position,
-                                        @_icon-font-display: block
+                                        @_icon-font-display: inline-block
                                     );
 
                                     &:after {
                                         margin-left: 1rem;
                                     }
                                 }
-                                &.active {
-                                    > .clw-link {
+                            }
+                            &.active {
+                                > .clw-link {
+                                    .clw-link-icon {
                                         .lib-icon-font-symbol(
                                             @_icon-font-content: @mgk-clw-collapsible__icon-active__content,
                                             @_icon-font-position: @mgk-clw-collapsible__icon__position

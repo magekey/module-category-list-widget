@@ -22,18 +22,22 @@ if (($node = $block->getNode()) && $node->hasChildren()) {
     <ul <?= /* @escapeNotVerified */ $_decorator->renderAttributes($node, ['list']) ?>>
         <?php foreach ($node->getChildren() as $child) : ?>
             <?php $child->setClwLevel($level + 1); ?>
-            <?php $child->setHasCollapsed(!$level); ?>
+            <?php $child->setHasCollapsed($child->hasChildren()); ?>
             <li <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['item']) ?>
                 <?php if ($child->getHasCollapsed()) : ?>
                 data-mage-init='{
                     "collapsible":{
-                        "openedState": "active"
+                        "openedState": "active",
+                        "trigger": "> .clw-link-icon"
                     }
                 }'
                 <?php endif; ?>>
                 <a <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['link']) ?>
                    href="<?= /* @escapeNotVerified */ $child->getUrl() ?>" data-role="title">
                     <?= /* @escapeNotVerified */ $child->getName() ?>
+                    <?php if ($child->getHasCollapsed()) : ?>
+                    <span <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['link-icon']) ?>></span>
+                    <?php endif; ?>
                 </a>
                 <?php if ($child->hasChildren()) : ?>
                 <div <?= /* @escapeNotVerified */ $_decorator->renderAttributes($child, ['container']) ?>

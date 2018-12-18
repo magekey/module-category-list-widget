@@ -21,6 +21,11 @@
                     <item name="template" xsi:type="string">MageKey_CategoryListWidget::widget/collapsible.phtml</item>
                     <item name="source" xsi:type="string">MageKey\CategoryListWidget\Model\TemplateHandler\Collapsible</item>
                 </item>
+                <item name="collapsible_multiple" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Multiple Collapsible List</item>
+                    <item name="template" xsi:type="string">MageKey_CategoryListWidget::widget/collapsible-multiple.phtml</item>
+                    <item name="source" xsi:type="string">MageKey\CategoryListWidget\Model\TemplateHandler\Collapsible</item>
+                </item>
                 <item name="inline_images" xsi:type="array">
                     <item name="title" xsi:type="string" translate="true">Inline List with Images</item>
                 	<item name="template" xsi:type="string">MageKey_CategoryListWidget::widget/inline-images.phtml</item>
