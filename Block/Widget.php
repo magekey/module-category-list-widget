@@ -184,22 +184,25 @@ class Widget extends \Magento\Framework\View\Element\Template implements BlockIn
                 }
 
                 if ($sortBy = $this->getSortBy()) {
-                    $collection->addAttributeToSort($sortBy);
-                } else {
-                    $collection->addAttributeToSort('position');
+                    $collection->addAttributeToSelect($sortBy);
                 }
+
                 $collection->load();
 
+                $sorted = [];
                 foreach ($collection as $category) {
                     if ($categoryTree->getNodeById($category->getId())) {
                         $data = array_merge(
                             $category->getData(),
                             [
-                                'url' => $category->getUrl(),
+                                'url' => $category->getUrl()
                             ],
                             $templateHandler ? $templateHandler->getCategoryData($category) : []
                         );
                         $categoryTree->getNodeById($category->getId())->addData($data);
+                        if ($sortBy && ($sortValue = (int)$category->getData($sortBy))) {
+                            $sorted[$category->getId()] = $sortValue;
+                        }
                     }
                 }
 
@@ -207,6 +210,10 @@ class Widget extends \Magento\Framework\View\Element\Template implements BlockIn
                     if (!$collection->getItemById($node->getId()) && $node->getParent()) {
                         $categoryTree->removeNode($node);
                     }
+                }
+
+                if (!empty($sorted)) {
+                    $this->_sortCategoryNode($categoryTree, $sorted);
                 }
 
                 $this->_categoryNode = $categoryNode;
@@ -264,5 +271,25 @@ class Widget extends \Magento\Framework\View\Element\Template implements BlockIn
                 $this->getNodeRendererTemplate(),
             ]
         );
+    }
+
+    /**
+     * Sort category tree
+     *
+     * @param \Magento\Framework\Data\Tree $node
+     * @param array $sorted
+     * @return void
+     */
+    protected function _sortCategoryNode(\Magento\Framework\Data\Tree $tree, array $sorted)
+    {
+        asort($sorted);
+        foreach ($sorted as $id => $sortValue) {
+            if ($node = $tree->getNodeById($id)) {
+                if ($parent = $node->getParent()) {
+                    $tree->removeNode($node);
+                    $tree->addNode($node, $parent);
+                }
+            }
+        }
     }
 }

@@ -23,6 +23,8 @@ class InlineImages extends DefaultList
         }
 
         $collection->addAttributeToSelect(array_unique($attributes));
+
+        parent::prepareCollection($collection, $options);
     }
 
     /**
