@@ -282,13 +282,36 @@ class Widget extends \Magento\Framework\View\Element\Template implements BlockIn
      */
     protected function _sortCategoryNode(\Magento\Framework\Data\Tree $tree, array $sorted)
     {
-        asort($sorted);
-        foreach ($sorted as $id => $sortValue) {
+        while(!empty($sorted)) {
+            $id = key($sorted);
             if ($node = $tree->getNodeById($id)) {
                 if ($parent = $node->getParent()) {
-                    $tree->removeNode($node);
-                    $tree->addNode($node, $parent);
+                    $pSorted = [];
+                    $nChilds = [];
+                    foreach ($parent->getChildren() as $child) {
+                        $childId = $child->getId();
+                        if (isset($sorted[$childId])) {
+                            $pSorted[$childId] = $sorted[$childId];
+                            unset($sorted[$childId]);
+                        }
+                        $nChilds[$childId] = $child;
+                        $tree->removeNode($child);
+                    }
+
+                    asort($pSorted);
+                    foreach ($pSorted as $childId => $sortValue) {
+                        $tree->addNode($nChilds[$childId], $parent);
+                    }
+                    foreach ($nChilds as $childId => $child) {
+                        if (!isset($pSorted[$childId])) {
+                            $tree->addNode($child, $parent);
+                        }
+                    }
+                    unset($nChilds);
                 }
+            }
+            if (isset($sorted[$id])) {
+                unset($sorted[$id]);
             }
         }
     }
