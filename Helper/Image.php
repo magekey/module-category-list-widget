@@ -59,12 +59,18 @@ class Image extends \Magento\Framework\App\Helper\AbstractHelper
     protected $assetRepo;
 
     /**
+     * @var string
+     */
+    protected $placeholder;
+
+    /**
      * @param \Magento\Framework\App\Helper\Context $context
      * @param StoreManagerInterface $storeManager
      * @param \Magento\Framework\Filesystem $filesystem
      * @param \Magento\Framework\Image\AdapterFactory $imageFactory
      * @param \Magento\Framework\View\ConfigInterface $viewConfig
      * @param AssetRepository $assetRepo
+     * @param string $placeholder
      */
     public function __construct(
         \Magento\Framework\App\Helper\Context $context,
@@ -72,13 +78,15 @@ class Image extends \Magento\Framework\App\Helper\AbstractHelper
         \Magento\Framework\Filesystem $filesystem,
         \Magento\Framework\Image\AdapterFactory $imageFactory,
         \Magento\Framework\View\ConfigInterface $viewConfig,
-        AssetRepository $assetRepo
+        AssetRepository $assetRepo,
+        $placeholder = null
     ) {
         $this->storeManager = $storeManager;
         $this->filesystem = $filesystem;
         $this->imageFactory = $imageFactory;
         $this->viewConfig = $viewConfig;
         $this->assetRepo = $assetRepo;
+        $this->placeholder = $placeholder ?: self::DEFAULT_PLACEHOLDER;
         parent::__construct($context);
     }
 
@@ -211,7 +219,7 @@ class Image extends \Magento\Framework\App\Helper\AbstractHelper
     {
         try {
             $placeholder = $this->assetRepo->createAsset(
-                self::MODULE_NAME . '::images/' . self::DEFAULT_PLACEHOLDER
+                self::MODULE_NAME . '::images/' . $this->placeholder
             );
             return $placeholder->getSourceFile();
         } catch (\Exception $e) {
