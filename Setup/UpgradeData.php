@@ -92,6 +92,16 @@ class UpgradeData implements UpgradeDataInterface
             );
         }
 
+        if (version_compare($context->getVersion(), '2.1.11') < 0) {
+            $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
+            $eavSetup->updateAttribute(
+                \Magento\Catalog\Model\Category::ENTITY,
+                'is_show_image',
+                'is_required',
+                '0'
+            );
+        }
+
         $setup->endSetup();
     }
 }
